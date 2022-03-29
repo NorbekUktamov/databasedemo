@@ -1,4 +1,10 @@
+import 'package:databasedemo/pages/login_page.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import '../models/account_model.dart';
+import '../models/user_model.dart';
+import '../utils/db_service.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -11,7 +17,28 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
 
   TextEditingController emailController=  TextEditingController();
-  TextEditingController passwordController=  TextEditingController();
+  TextEditingController phoneController=  TextEditingController();
+  TextEditingController addressdController=  TextEditingController();
+
+  void _doSignIn(){
+
+
+    String email=emailController.text.toString().trim();
+    String phone =phoneController.text.toString().trim();
+    String adress =addressdController.text.toString().trim();
+
+    var account=Account(name: phone, password: adress,email: email);
+
+    HiveDB().setAccount(account);
+
+    var account2=HiveDB().getAccount();
+
+    print(account2.password);
+    print(account2.name);
+    print(account2.email);
+
+
+  }
 
 
   @override
@@ -20,32 +47,44 @@ class _RegisterPageState extends State<RegisterPage> {
       body: Container(
         width: double.infinity,
         decoration: BoxDecoration(
-          color: Colors.grey.shade100,
+          color: Color.fromRGBO(7, 127, 123 ,1),
         ),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: 50),
-
             //#login,#welcome
             Padding(
               padding: EdgeInsets.all(30),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
+                  //image
+                  ClipOval(
+                    child: SizedBox.fromSize(
+                      size: Size.fromRadius(38), // Image radius
+                      child:Image(
+                        image:AssetImage('assets/images/ic_image.jpeg'),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,),
                   Text(
-                    "Welcome back!",
+                    "Welcome",
                     style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 30,
+                        color: Color.fromRGBO(33, 158, 154,1),
+                        fontSize: 15,
                         fontWeight: FontWeight.bold),
                   ),
                   SizedBox(
                     height: 10,
                   ),
                   Text(
-                    "Sign In",
-                    style: TextStyle(color: Colors.grey.shade500, fontSize: 15),
+                    "Sign Up",
+                    style: TextStyle(color: Colors.white, fontSize: 30,fontWeight: FontWeight.w500),
                   )
                 ],
               ),
@@ -53,166 +92,135 @@ class _RegisterPageState extends State<RegisterPage> {
 
             Expanded(
               child: Container(
+                width: double.infinity,
                 decoration: BoxDecoration(
-                  color: Colors.green,
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(topLeft: Radius.circular(50),topRight: Radius.circular(50)),
                 ),
                 child: SingleChildScrollView(
                   child: Padding(
-                    padding: EdgeInsets.all(20),
+                    padding: EdgeInsets.all(30),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          "Create",
-                          style: TextStyle(color: Colors.white, fontSize: 30,fontWeight: FontWeight.bold),
-                        ),
-                        Text(
-                          "Account",
-                          style: TextStyle(color: Colors.white, fontSize: 30,fontWeight: FontWeight.bold),
-                        ),
                         SizedBox(
-                          height: 50,
+                          height: 20,
                         ),
-
                         //#registration
                         //User name
-                        TextFormField(
+                        Text("Email",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w500),),
 
-                          decoration: InputDecoration(
-                            prefixIconConstraints:BoxConstraints(minWidth: 23, maxHeight: 20),
-                            prefixIcon: Padding(
-                              padding: const EdgeInsets.only(right: 20),
-                              child: Icon(
-                                Icons.person,
-                                color: Colors.white38,
-                              ),),
-                            hintText: 'User Name',
-                            hintStyle: TextStyle(color: Colors.white38),
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white38),
-                            ),
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white38),
-                            ),
-
-
-                          ),
-                        ),
-
-                        SizedBox(height: 20,),
                         //Email
                         TextFormField(
                           controller: emailController,
                           decoration: InputDecoration(
-                            prefixIconConstraints:BoxConstraints(minWidth: 23, maxHeight: 20),
-                            prefixIcon: Padding(
-                              padding: const EdgeInsets.only(right: 20),
-                              child: Icon(
-                                Icons.email,
-                                color: Colors.white38,
-                              ),),
-                            hintText: 'E-mail',
-                            hintStyle: TextStyle(color: Colors.white38),
+                            hintText: 'Enter E-mail',
+                            hintStyle: TextStyle(color: Colors.grey.shade300),
                             enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white38),
+                              borderSide: BorderSide(color: Colors.grey.shade300),
                             ),
                             focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white38),
+                              borderSide: BorderSide(color: Colors.black),
                             ),
 
 
                           ),
                         ),
 
-                        SizedBox(height: 20,),
-                        //Phone
-                        TextFormField(
-
-                          decoration: InputDecoration(
-                            prefixIconConstraints:BoxConstraints(minWidth: 23, maxHeight: 20),
-                            prefixIcon: Padding(
-                              padding: const EdgeInsets.only(right: 20),
-                              child: Icon(
-                                Icons.phone,
-                                color: Colors.white38,
-                              ),),
-                            hintText: 'Phone Number',
-                            hintStyle: TextStyle(color: Colors.white38),
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white38),
-                            ),
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white38),
-                            ),
-
-
-                          ),
-                        ),
                         SizedBox(height: 20,),
                         //Password
+                        Text("Number",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w500),),
                         TextFormField(
-                          controller: passwordController,
+                          controller: phoneController,
                           decoration: InputDecoration(
-                            prefixIconConstraints:BoxConstraints(minWidth: 23, maxHeight: 20),
-                            prefixIcon: Padding(
-                              padding: const EdgeInsets.only(right: 20),
-                              child: Icon(
-                                Icons.lock,
-                                color: Colors.white38,
-                              ),),
-                            hintText: 'Password',
-                            hintStyle: TextStyle(color: Colors.white38),
+                            hintText: 'Enter Phone Number',
+                            hintStyle: TextStyle(color: Colors.grey.shade300),
                             enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white38),
+                              borderSide: BorderSide(color: Colors.grey.shade300),
                             ),
                             focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white38),
+                              borderSide: BorderSide(color: Colors.black),
                             ),
-
 
                           ),
                         ),
 
                         SizedBox(
-                          height: 60,
+                          height: 20,
+                        ),
+                        Text("Address",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w500),),
+                        TextFormField(
+                          controller: addressdController,
+                          decoration: InputDecoration(
+                            hintText: 'Enter Address',
+                            hintStyle: TextStyle(color: Colors.grey.shade300),
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.grey.shade300),
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black),
+                            ),
+
+                          ),
+                        ),
+
+                        SizedBox(
+                          height: 40,
                         ),
 
                         //#Sign Up button
-                        FlatButton(
-                          onPressed: () {
-
-
-                          },
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            primary: Color.fromRGBO(7, 127, 123 ,1),
+                          ),
                           child: Container(
-                            height: 90,
-                            width: 90,
-                            padding: EdgeInsets.all(15),
-                            decoration: BoxDecoration(
-                              color: Colors.blue,
-                              borderRadius: BorderRadius.circular(50),
-                              gradient: LinearGradient(
-                                  colors: [Colors.indigo,Colors.blue.shade400,],
-                                  end: Alignment.topRight,
-                                  begin: Alignment.topLeft
-                              ),
+                            height: 45,
+                            width: double.infinity,
+                            alignment: Alignment.center,
+                            decoration: const BoxDecoration(
 
                             ),
-
-                            child: Icon(Icons.arrow_forward_outlined,color: Colors.white,size:30,),
-                          ),),
-                        SizedBox(
-                          height: 80,
+                            child: const Text(
+                              'Sign Up',
+                              style: TextStyle(fontSize: 20,color: Color.fromRGBO(162, 207, 205 ,1)),
+                            ),
+                          ),
+                          onPressed: () {
+                            _doSignIn();
+                          },
                         ),
+                        SizedBox(height: 10,),
+                        Center(
+                          child:Text("OR",style: TextStyle(color: Colors.grey.shade300,)) ,
+                        ),
+                        SizedBox(height: 30,),
+
+
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(FontAwesomeIcons.facebook,color:Colors.indigo, size: 20.0),
+                            SizedBox(width: 40,),
+                            Icon(FontAwesomeIcons.github,color: Colors.black, size: 20.0),
+                            SizedBox(width: 40,),
+                            Icon(FontAwesomeIcons.telegram,color: Colors.blue, size:20.0),
+                          ],
+                        ),
+
+                        SizedBox(
+                          height: 20,
+                        ),
+
                         //#Bottom
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text("Already have an account?",style:TextStyle(color: Colors.grey.shade800,fontSize: 15,fontWeight: FontWeight.bold) ,),
+                            Text("Don't have an account?",style:TextStyle(color: Colors.grey.shade300,fontSize: 15,fontWeight: FontWeight.bold) ,),
                             FlatButton(
                               onPressed: (){
-                                //Navigator.pushNamed(context,SignInPage.id);
+                                Navigator.pushNamed(context,LoginPage.id);
                               },
-                              child: Text("SIGN IN",style:TextStyle(color: Colors.blue,fontSize: 15,fontWeight: FontWeight.bold) ,),),
+                              child: Text("Sign Up",style:TextStyle(color:Color.fromRGBO(7, 127, 123 ,1),fontSize: 15,fontWeight: FontWeight.bold) ,),),
                           ],
                         ),
                       ],

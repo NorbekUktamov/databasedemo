@@ -23,14 +23,14 @@ class _HomepageState extends State<Homepage> {
     String username=usernameController.text.toString().trim();
     String password =passwordController.text.toString().trim();
 
-    var user=User(name: username, password: password);
+    var user=User(email: username, password: password);
 
     HiveDB().setUser(user);
 
     var user2=HiveDB().getUser();
 
     print(user2.password);
-    print(user2.name);
+    print(user2.email);
 
 
   }

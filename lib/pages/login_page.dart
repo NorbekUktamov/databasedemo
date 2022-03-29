@@ -1,6 +1,11 @@
+import 'package:databasedemo/pages/register_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import '../models/user_model.dart';
+import '../utils/db_service.dart';
+import 'home_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -15,6 +20,30 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController emailController=  TextEditingController();
   TextEditingController passwordController=  TextEditingController();
 
+  void _doLogin(){
+
+
+
+    String email=emailController.text.toString().trim();
+    String password =passwordController.text.toString().trim();
+    if(email.isNotEmpty && password.isNotEmpty){
+      Navigator.pushNamed(context,Homepage.id);
+    }
+
+    var user=User(email: email, password: password);
+
+
+    HiveDB().setUser(user);
+
+    var user2=HiveDB().getUser();
+
+
+    print(user2.password);
+    print(user2.email);
+
+
+  }
+
 
 
 
@@ -24,7 +53,7 @@ class _LoginPageState extends State<LoginPage> {
       body: Container(
         width: double.infinity,
         decoration: BoxDecoration(
-          color: Colors.green,
+          color: Color.fromRGBO(7, 127, 123 ,1),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -52,7 +81,7 @@ class _LoginPageState extends State<LoginPage> {
                   Text(
                     "Welcome",
                     style: TextStyle(
-                        color: Colors.black,
+                        color: Color.fromRGBO(33, 158, 154,1),
                         fontSize: 15,
                         fontWeight: FontWeight.bold),
                   ),
@@ -61,7 +90,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   Text(
                     "Sign In",
-                    style: TextStyle(color: Colors.grey.shade500, fontSize: 30),
+                    style: TextStyle(color: Colors.white, fontSize: 30,fontWeight: FontWeight.w500),
                   )
                 ],
               ),
@@ -81,7 +110,7 @@ class _LoginPageState extends State<LoginPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(
-                          height: 40,
+                          height: 20,
                         ),
                         //#registration
                         //User name
@@ -104,27 +133,9 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
 
-                        SizedBox(height: 20,),
-                        //Phone
-                        Text("Number",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w500,),),
-                        TextFormField(
-
-                          decoration: InputDecoration(
-                            hintText: 'Enter Phone Number',
-                            hintStyle: TextStyle(color: Colors.grey.shade300),
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.grey.shade300),
-                            ),
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.black),
-                            ),
-
-
-                          ),
-                        ),
-                        SizedBox(height: 20,),
+                        SizedBox(height: 40,),
                         //Password
-                        Text("Address",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w500),),
+                        Text("Password",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w500),),
                         TextFormField(
                           controller: passwordController,
                           decoration: InputDecoration(
@@ -141,35 +152,51 @@ class _LoginPageState extends State<LoginPage> {
                         ),
 
                         SizedBox(
-                          height: 50,
+                          height: 30,
+                        ),
+                        Center(
+                          child:Text("Forgot Password?",style: TextStyle(color: Colors.grey.shade300,)) ,
+                        ),
+                        SizedBox(
+                          height: 30,
                         ),
 
                         //#Sign Up button
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
+                          primary: Color.fromRGBO(7, 127, 123 ,1),
                           ),
                           child: Container(
                             height: 45,
+                            width: double.infinity,
                             alignment: Alignment.center,
-                            decoration: const BoxDecoration(shape: BoxShape.circle),
+                            decoration: const BoxDecoration(
+
+                            ),
                             child: const Text(
                               'Sign In',
-                              style: TextStyle(fontSize: 20),
+                              style: TextStyle(fontSize: 20,color: Color.fromRGBO(162, 207, 205 ,1)),
                             ),
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            _doLogin();
+                          },
                         ),
                         SizedBox(height: 10,),
-                        Text("OR",style: TextStyle(color: Colors.grey.shade300,)),
+                        Center(
+                          child:Text("OR",style: TextStyle(color: Colors.grey.shade300,)) ,
+                        ),
+                        SizedBox(height: 30,),
+
 
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Icon(FontAwesomeIcons.facebook, size: 20.0),
-                            SizedBox(width: 10,),
-                            Icon(FontAwesomeIcons.twitter, size: 20.0),
-                            SizedBox(width: 10,),
-                            Icon(FontAwesomeIcons.telegram, size:20.0),
+                            Icon(FontAwesomeIcons.facebook,color:Colors.indigo, size: 20.0),
+                            SizedBox(width: 40,),
+                            Icon(FontAwesomeIcons.github,color: Colors.black, size: 20.0),
+                            SizedBox(width: 40,),
+                            Icon(FontAwesomeIcons.telegram,color: Colors.blue, size:20.0),
                           ],
                         ),
 
@@ -181,12 +208,12 @@ class _LoginPageState extends State<LoginPage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text("Don't have an account?",style:TextStyle(color: Colors.grey.shade800,fontSize: 15,fontWeight: FontWeight.bold) ,),
+                            Text("Don't have an account?",style:TextStyle(color: Colors.grey.shade300,fontSize: 15,fontWeight: FontWeight.bold) ,),
                             FlatButton(
                               onPressed: (){
-                                //Navigator.pushNamed(context,SignInPage.id);
+                                Navigator.pushNamed(context,RegisterPage.id);
                               },
-                              child: Text("Sign Up",style:TextStyle(color: Colors.blue,fontSize: 15,fontWeight: FontWeight.bold) ,),),
+                              child: Text("Sign In",style:TextStyle(color:Color.fromRGBO(7, 127, 123 ,1),fontSize: 15,fontWeight: FontWeight.bold) ,),),
                           ],
                         ),
                       ],
