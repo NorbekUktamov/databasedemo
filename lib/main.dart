@@ -1,4 +1,5 @@
 import 'package:databasedemo/pages/home_page.dart';
+import 'package:databasedemo/pages/sign_up_page.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hive/hive.dart';
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
 
         primarySwatch: Colors.blue,
       ),
-      home:Homepage(),
+      home:SignUpPage(),
     );
   }
 }
