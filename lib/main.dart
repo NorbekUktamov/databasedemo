@@ -1,4 +1,6 @@
 import 'package:databasedemo/pages/home_page.dart';
+import 'package:databasedemo/pages/login_page.dart';
+import 'package:databasedemo/pages/register_page.dart';
 import 'package:databasedemo/pages/sign_in_page.dart';
 import 'package:databasedemo/pages/sign_up_page.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +27,14 @@ class MyApp extends StatelessWidget {
 
         primarySwatch: Colors.blue,
       ),
-      home:SignInPage(),
+      home: LoginPage(),
+      routes: {
+        Homepage.id:(context)=>Homepage(),
+        SignUpPage.id:(context)=>SignUpPage(),
+        SignInPage.id:(context)=>SignInPage(),
+        LoginPage.id:(context)=>LoginPage(),
+        RegisterPage.id:(context)=>RegisterPage(),
+      },
     );
   }
 }

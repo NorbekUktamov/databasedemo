@@ -1,15 +1,14 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
-  static final id="login_page";
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({Key? key}) : super(key: key);
+  static final id="register_page";
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
 
   TextEditingController emailController=  TextEditingController();
   TextEditingController passwordController=  TextEditingController();
@@ -21,36 +20,24 @@ class _LoginPageState extends State<LoginPage> {
       body: Container(
         width: double.infinity,
         decoration: BoxDecoration(
-          color: Colors.green,
+          color: Colors.grey.shade100,
         ),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             SizedBox(height: 50),
+
             //#login,#welcome
             Padding(
               padding: EdgeInsets.all(30),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  //image
-                  ClipOval(
-                    child: SizedBox.fromSize(
-                      size: Size.fromRadius(38), // Image radius
-                      child:Image(
-                        image:AssetImage('assets/images/ic_image.jpeg'),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20,),
                   Text(
-                    "Welcome",
+                    "Welcome back!",
                     style: TextStyle(
                         color: Colors.black,
-                        fontSize: 15,
+                        fontSize: 30,
                         fontWeight: FontWeight.bold),
                   ),
                   SizedBox(
@@ -58,7 +45,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   Text(
                     "Sign In",
-                    style: TextStyle(color: Colors.grey.shade500, fontSize: 30),
+                    style: TextStyle(color: Colors.grey.shade500, fontSize: 15),
                   )
                 ],
               ),
@@ -66,10 +53,8 @@ class _LoginPageState extends State<LoginPage> {
 
             Expanded(
               child: Container(
-                width: double.infinity,
                 decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(topLeft: Radius.circular(50),topRight: Radius.circular(50)),
+                  color: Colors.green,
                 ),
                 child: SingleChildScrollView(
                   child: Padding(
@@ -77,18 +62,37 @@ class _LoginPageState extends State<LoginPage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
+                        Text(
+                          "Create",
+                          style: TextStyle(color: Colors.white, fontSize: 30,fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          "Account",
+                          style: TextStyle(color: Colors.white, fontSize: 30,fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(
+                          height: 50,
+                        ),
+
                         //#registration
                         //User name
                         TextFormField(
 
                           decoration: InputDecoration(
+                            prefixIconConstraints:BoxConstraints(minWidth: 23, maxHeight: 20),
+                            prefixIcon: Padding(
+                              padding: const EdgeInsets.only(right: 20),
+                              child: Icon(
+                                Icons.person,
+                                color: Colors.white38,
+                              ),),
                             hintText: 'User Name',
-                            hintStyle: TextStyle(color: Colors.black),
+                            hintStyle: TextStyle(color: Colors.white38),
                             enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.black),
+                              borderSide: BorderSide(color: Colors.white38),
                             ),
                             focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.black),
+                              borderSide: BorderSide(color: Colors.white38),
                             ),
 
 
@@ -100,13 +104,20 @@ class _LoginPageState extends State<LoginPage> {
                         TextFormField(
                           controller: emailController,
                           decoration: InputDecoration(
+                            prefixIconConstraints:BoxConstraints(minWidth: 23, maxHeight: 20),
+                            prefixIcon: Padding(
+                              padding: const EdgeInsets.only(right: 20),
+                              child: Icon(
+                                Icons.email,
+                                color: Colors.white38,
+                              ),),
                             hintText: 'E-mail',
-                            hintStyle: TextStyle(color: Colors.black),
+                            hintStyle: TextStyle(color: Colors.white38),
                             enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.black),
+                              borderSide: BorderSide(color: Colors.white38),
                             ),
                             focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.black),
+                              borderSide: BorderSide(color: Colors.white38),
                             ),
 
 
@@ -118,13 +129,20 @@ class _LoginPageState extends State<LoginPage> {
                         TextFormField(
 
                           decoration: InputDecoration(
+                            prefixIconConstraints:BoxConstraints(minWidth: 23, maxHeight: 20),
+                            prefixIcon: Padding(
+                              padding: const EdgeInsets.only(right: 20),
+                              child: Icon(
+                                Icons.phone,
+                                color: Colors.white38,
+                              ),),
                             hintText: 'Phone Number',
-                            hintStyle: TextStyle(color: Colors.black),
+                            hintStyle: TextStyle(color: Colors.white38),
                             enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.black),
+                              borderSide: BorderSide(color: Colors.white38),
                             ),
                             focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.black),
+                              borderSide: BorderSide(color: Colors.white38),
                             ),
 
 
@@ -135,14 +153,22 @@ class _LoginPageState extends State<LoginPage> {
                         TextFormField(
                           controller: passwordController,
                           decoration: InputDecoration(
+                            prefixIconConstraints:BoxConstraints(minWidth: 23, maxHeight: 20),
+                            prefixIcon: Padding(
+                              padding: const EdgeInsets.only(right: 20),
+                              child: Icon(
+                                Icons.lock,
+                                color: Colors.white38,
+                              ),),
                             hintText: 'Password',
-                            hintStyle: TextStyle(color: Colors.black),
+                            hintStyle: TextStyle(color: Colors.white38),
                             enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.black),
+                              borderSide: BorderSide(color: Colors.white38),
                             ),
                             focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.black),
+                              borderSide: BorderSide(color: Colors.white38),
                             ),
+
 
                           ),
                         ),
@@ -152,18 +178,28 @@ class _LoginPageState extends State<LoginPage> {
                         ),
 
                         //#Sign Up button
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              primary: Colors.purple,
-                              padding: EdgeInsets.symmetric(horizontal: 120, vertical: 20),
-                              textStyle: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold)),
-                          onPressed: (){
+                        FlatButton(
+                          onPressed: () {
+
 
                           },
-                          child: Text("Sign Up"),
-                        ),
+                          child: Container(
+                            height: 90,
+                            width: 90,
+                            padding: EdgeInsets.all(15),
+                            decoration: BoxDecoration(
+                              color: Colors.blue,
+                              borderRadius: BorderRadius.circular(50),
+                              gradient: LinearGradient(
+                                  colors: [Colors.indigo,Colors.blue.shade400,],
+                                  end: Alignment.topRight,
+                                  begin: Alignment.topLeft
+                              ),
+
+                            ),
+
+                            child: Icon(Icons.arrow_forward_outlined,color: Colors.white,size:30,),
+                          ),),
                         SizedBox(
                           height: 80,
                         ),
