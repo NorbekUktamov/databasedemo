@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -13,6 +14,8 @@ class _LoginPageState extends State<LoginPage> {
 
   TextEditingController emailController=  TextEditingController();
   TextEditingController passwordController=  TextEditingController();
+
+
 
 
   @override
@@ -73,37 +76,25 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 child: SingleChildScrollView(
                   child: Padding(
-                    padding: EdgeInsets.all(20),
+                    padding: EdgeInsets.all(30),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        SizedBox(
+                          height: 40,
+                        ),
                         //#registration
                         //User name
-                        TextFormField(
+                        Text("Email",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w500),),
 
-                          decoration: InputDecoration(
-                            hintText: 'User Name',
-                            hintStyle: TextStyle(color: Colors.black),
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.black),
-                            ),
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.black),
-                            ),
-
-
-                          ),
-                        ),
-
-                        SizedBox(height: 20,),
                         //Email
                         TextFormField(
                           controller: emailController,
                           decoration: InputDecoration(
-                            hintText: 'E-mail',
-                            hintStyle: TextStyle(color: Colors.black),
+                            hintText: 'Enter E-mail',
+                            hintStyle: TextStyle(color: Colors.grey.shade300),
                             enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.black),
+                              borderSide: BorderSide(color: Colors.grey.shade300),
                             ),
                             focusedBorder: UnderlineInputBorder(
                               borderSide: BorderSide(color: Colors.black),
@@ -115,13 +106,14 @@ class _LoginPageState extends State<LoginPage> {
 
                         SizedBox(height: 20,),
                         //Phone
+                        Text("Number",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w500,),),
                         TextFormField(
 
                           decoration: InputDecoration(
-                            hintText: 'Phone Number',
-                            hintStyle: TextStyle(color: Colors.black),
+                            hintText: 'Enter Phone Number',
+                            hintStyle: TextStyle(color: Colors.grey.shade300),
                             enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.black),
+                              borderSide: BorderSide(color: Colors.grey.shade300),
                             ),
                             focusedBorder: UnderlineInputBorder(
                               borderSide: BorderSide(color: Colors.black),
@@ -132,13 +124,14 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         SizedBox(height: 20,),
                         //Password
+                        Text("Address",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w500),),
                         TextFormField(
                           controller: passwordController,
                           decoration: InputDecoration(
-                            hintText: 'Password',
-                            hintStyle: TextStyle(color: Colors.black),
+                            hintText: 'Enter Password',
+                            hintStyle: TextStyle(color: Colors.grey.shade300),
                             enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.black),
+                              borderSide: BorderSide(color: Colors.grey.shade300),
                             ),
                             focusedBorder: UnderlineInputBorder(
                               borderSide: BorderSide(color: Colors.black),
@@ -148,35 +141,52 @@ class _LoginPageState extends State<LoginPage> {
                         ),
 
                         SizedBox(
-                          height: 60,
+                          height: 50,
                         ),
 
                         //#Sign Up button
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                              primary: Colors.purple,
-                              padding: EdgeInsets.symmetric(horizontal: 120, vertical: 20),
-                              textStyle: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold)),
-                          onPressed: (){
+                          ),
+                          child: Container(
+                            height: 45,
+                            alignment: Alignment.center,
+                            decoration: const BoxDecoration(shape: BoxShape.circle),
+                            child: const Text(
+                              'Sign In',
+                              style: TextStyle(fontSize: 20),
+                            ),
+                          ),
+                          onPressed: () {},
+                        ),
+                        SizedBox(height: 10,),
+                        Text("OR",style: TextStyle(color: Colors.grey.shade300,)),
 
-                          },
-                          child: Text("Sign Up"),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(FontAwesomeIcons.facebook, size: 20.0),
+                            SizedBox(width: 10,),
+                            Icon(FontAwesomeIcons.twitter, size: 20.0),
+                            SizedBox(width: 10,),
+                            Icon(FontAwesomeIcons.telegram, size:20.0),
+                          ],
                         ),
+
                         SizedBox(
-                          height: 80,
+                          height: 20,
                         ),
+
                         //#Bottom
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text("Already have an account?",style:TextStyle(color: Colors.grey.shade800,fontSize: 15,fontWeight: FontWeight.bold) ,),
+                            Text("Don't have an account?",style:TextStyle(color: Colors.grey.shade800,fontSize: 15,fontWeight: FontWeight.bold) ,),
                             FlatButton(
                               onPressed: (){
                                 //Navigator.pushNamed(context,SignInPage.id);
                               },
-                              child: Text("SIGN IN",style:TextStyle(color: Colors.blue,fontSize: 15,fontWeight: FontWeight.bold) ,),),
+                              child: Text("Sign Up",style:TextStyle(color: Colors.blue,fontSize: 15,fontWeight: FontWeight.bold) ,),),
                           ],
                         ),
                       ],
