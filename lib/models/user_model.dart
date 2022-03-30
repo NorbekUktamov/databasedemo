@@ -13,7 +13,6 @@ class User {
   //a method that convert object to json
   Map<String, dynamic> toJson() => {
     'email': email,
-
     'password':password,
   };
 }

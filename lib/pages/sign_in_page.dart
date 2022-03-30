@@ -2,6 +2,10 @@ import 'package:databasedemo/pages/sign_up_page.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 
+import 'home_page.dart';
+
+
+
 class SignInPage extends StatefulWidget {
   const SignInPage({Key? key}) : super(key: key);
   static final id = "sign_in_page";
@@ -11,8 +15,33 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SignInPageState extends State<SignInPage> {
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+   TextEditingController emailController = TextEditingController();
+   TextEditingController passwordController = TextEditingController();
+
+
+  void _doLogin() {
+
+
+    String email=emailController.text.toString().trim();
+    String password =passwordController.text.toString().trim();
+
+    if(email.isNotEmpty && password.isNotEmpty){
+      Navigator.pushNamed(context,Homepage.id);
+    }
+
+    var box= Hive.box('Hive_database');
+    box.put(email, 'email');
+    box.put(password, 'password');
+
+
+    String user_email=box.get('email');
+    String user_password=box.get('password');
+
+    print("Password:"+user_password);
+    print("Email:"+user_email);
+
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,15 +52,17 @@ class _SignInPageState extends State<SignInPage> {
           color: Color.fromRGBO(28, 28, 55, 1),
         ),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(height: 80),
+            SizedBox(height: 70),
             //#login,#welcome
             Padding(
               padding: EdgeInsets.all(20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+
                   Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
@@ -44,7 +75,7 @@ class _SignInPageState extends State<SignInPage> {
                     ),
                   ),
                   SizedBox(
-                    height: 60,
+                    height: 30,
                   ),
                   Text(
                     "Welcome Back!",
@@ -64,115 +95,149 @@ class _SignInPageState extends State<SignInPage> {
                     height: 50,
                   ),
 
-                  //#registration
-                  //User name
-                  TextFormField(
-                    decoration: InputDecoration(
-                      prefixIconConstraints:
-                          BoxConstraints(minWidth: 23, maxHeight: 20),
-                      prefixIcon: Padding(
-                        padding: const EdgeInsets.only(right: 20),
-                        child: Icon(
-                          Icons.person,
-                          color: Colors.white38,
+                ],
+              ),
+              ),
+            Expanded(
+              child: Container(
+                width: double.infinity,
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding: EdgeInsets.all(20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        //#registration
+                        //User name
+
+                        TextFormField(
+                          style: TextStyle(color: Colors.white),
+                          controller: emailController,
+                          decoration: InputDecoration(
+                            prefixIconConstraints:
+                            BoxConstraints(minWidth: 23, maxHeight: 20),
+                            prefixIcon: Padding(
+                              padding: const EdgeInsets.only(right: 20),
+                              child: Icon(
+                                Icons.person,
+                                color: Colors.white38,
+                              ),
+                            ),
+                            hintText: 'User Name',
+                            hintStyle: TextStyle(color: Colors.white38),
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.white38),
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.white38),
+                            ),
+                          ),
                         ),
-                      ),
-                      hintText: 'User Name',
-                      hintStyle: TextStyle(color: Colors.white38),
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white38),
-                      ),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white38),
-                      ),
-                    ),
-                  ),
 
-                  SizedBox(
-                    height: 20,
-                  ),
-
-                  //Password
-                  TextFormField(
-                    controller: passwordController,
-                    decoration: InputDecoration(
-                      prefixIconConstraints:
-                          BoxConstraints(minWidth: 23, maxHeight: 20),
-                      prefixIcon: Padding(
-                        padding: const EdgeInsets.only(right: 20),
-                        child: Icon(
-                          Icons.lock,
-                          color: Colors.white38,
+                        SizedBox(
+                          height: 20,
                         ),
-                      ),
-                      hintText: 'Password',
-                      hintStyle: TextStyle(color: Colors.white38),
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white38),
-                      ),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white38),
-                      ),
-                    ),
-                  ),
 
-                  SizedBox(
-                    height: 60,
-                  ),
+                        //Password
+                        TextFormField(
+                          style: TextStyle(color: Colors.white),
+                          controller: passwordController,
+                          decoration: InputDecoration(
+                            prefixIconConstraints:
+                            BoxConstraints(minWidth: 23, maxHeight: 20),
+                            prefixIcon: Padding(
+                              padding: const EdgeInsets.only(right: 20),
+                              child: Icon(
+                                Icons.lock,
+                                color: Colors.white38,
+                              ),
+                            ),
+                            hintText: 'Password',
+                            hintStyle: TextStyle(color: Colors.white38),
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.white38),
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.white38),
+                            ),
+                          ),
+                        ),
 
-                  //#Sign Up button
-                  FlatButton(
-                    onPressed: () {},
-                    child: Container(
-                      height: 90,
-                      width: 90,
-                      padding: EdgeInsets.all(15),
-                      decoration: BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.circular(50),
-                        gradient: LinearGradient(colors: [
-                          Colors.indigo,
-                          Colors.blue.shade400,
-                        ], end: Alignment.topRight, begin: Alignment.topLeft),
-                      ),
-                      child: Icon(
-                        Icons.arrow_forward_outlined,
-                        color: Colors.white,
-                        size: 30,
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 80,
-                  ),
-                  //#Bottom
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Don't have an account?",
-                        style: TextStyle(
-                            color: Colors.grey.shade800,
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      FlatButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, SignUpPage.id);
-                        },
-                        child: Text(
-                          "SIGN IN",
+                        SizedBox(
+                          height: 30,
+                        ),
+                        Text(
+                          "Forgot Password?",
                           style: TextStyle(
-                              color: Colors.blue,
+                              color: Colors.white38,
                               fontSize: 15,
                               fontWeight: FontWeight.bold),
                         ),
-                      ),
-                    ],
+                        SizedBox(
+                          height: 50,
+                        ),
+
+                        //#Sign Up button
+                        FlatButton(
+                          onPressed: () {
+                            _doLogin();
+                          },
+                          child: Container(
+                            height: 90,
+                            width: 90,
+                            padding: EdgeInsets.all(15),
+                            decoration: BoxDecoration(
+                              color: Colors.blue,
+                              borderRadius: BorderRadius.circular(50),
+                              gradient: LinearGradient(colors: [
+                                Colors.indigo,
+                                Colors.blue.shade400,
+                              ], end: Alignment.topRight, begin: Alignment.topLeft),
+                            ),
+                            child: Icon(
+                              Icons.arrow_forward_outlined,
+                              color: Colors.white,
+                              size: 30,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 60,
+                        ),
+                        //#Bottom
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "Don't have an account?",
+                              style: TextStyle(
+                                  color: Colors.white38,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            FlatButton(
+                              onPressed: () {
+                                Navigator.pushNamed(context, SignUpPage.id);
+                              },
+                              child: Text(
+                                "SIGN UP",
+                                style: TextStyle(
+                                    color: Colors.blue,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
-                ],
+                ),
               ),
             ),
+
+
           ],
         ),
       ),

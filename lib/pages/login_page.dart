@@ -26,6 +26,7 @@ class _LoginPageState extends State<LoginPage> {
 
     String email=emailController.text.toString().trim();
     String password =passwordController.text.toString().trim();
+
     if(email.isNotEmpty && password.isNotEmpty){
       Navigator.pushNamed(context,Homepage.id);
     }
@@ -38,8 +39,8 @@ class _LoginPageState extends State<LoginPage> {
     var user2=HiveDB().getUser();
 
 
-    print(user2.password);
-    print(user2.email);
+    print("Password:"+user2.password);
+    print("Email:"+user2.email);
 
 
   }

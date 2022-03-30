@@ -14,57 +14,27 @@ class Homepage extends StatefulWidget {
 
 class _HomepageState extends State<Homepage> {
 
-  final usernameController=TextEditingController();
-  final passwordController=TextEditingController();
 
-  void _doLogin(){
+  // var account2=HiveDB().getAccount();
 
 
-    String username=usernameController.text.toString().trim();
-    String password =passwordController.text.toString().trim();
-
-    var user=User(email: username, password: password);
-
-    HiveDB().setUser(user);
-
-    var user2=HiveDB().getUser();
-
-    print(user2.password);
-    print(user2.email);
-
-
-  }
 
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        padding: EdgeInsets.all(20),
+      body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            TextField(
-              controller: usernameController,
-              decoration: InputDecoration(
-                hintText: "Username",
-                icon: Icon(Icons.email),
+            Text("Welcome",),
 
-              ),
-            ),
-            TextField(
-              controller: passwordController,
-              decoration: InputDecoration(
-                hintText: "Password",
-                icon: Icon(Icons.lock),
-              ),
-            ),
-            ElevatedButton(
-              onPressed: (){
-                _doLogin();
-              },
-              child: Text("Login"),
-            ),
+            // Text(account2.password),
+            // Text(account2.email),
+            // Text(account2.phone),
+            // Text(account2.name),
+
           ],
         ),
       ),

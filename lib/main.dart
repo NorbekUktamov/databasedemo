@@ -7,10 +7,14 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hive/hive.dart';
 
+
+
 void main() async {
+
 
   await Hive.initFlutter();
   await Hive.openBox('Hive_database');
+
 
   runApp(const MyApp());
 }
@@ -23,17 +27,18 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
 
         primarySwatch: Colors.blue,
       ),
-      home: RegisterPage(),
+      home: SignInPage(),
       routes: {
         Homepage.id:(context)=>Homepage(),
         SignUpPage.id:(context)=>SignUpPage(),
         SignInPage.id:(context)=>SignInPage(),
-        LoginPage.id:(context)=>LoginPage(),
-        RegisterPage.id:(context)=>RegisterPage(),
+        // LoginPage.id:(context)=>LoginPage(),
+        // RegisterPage.id:(context)=>RegisterPage(),
       },
     );
   }

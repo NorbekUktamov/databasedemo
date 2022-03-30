@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../models/account_model.dart';
 import '../models/user_model.dart';
 import '../utils/db_service.dart';
+import 'home_page.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -26,16 +27,21 @@ class _RegisterPageState extends State<RegisterPage> {
     String email=emailController.text.toString().trim();
     String phone =phoneController.text.toString().trim();
     String adress =addressdController.text.toString().trim();
+    String name =emailController.text.toString().trim();
 
-    var account=Account(name: phone, password: adress,email: email);
+    if(email.isNotEmpty && phone.isNotEmpty){
+      Navigator.pushNamed(context,Homepage.id);
+    }
+
+    var account=Account(phone: phone, password: email,email: email, name: adress);
 
     HiveDB().setAccount(account);
 
     var account2=HiveDB().getAccount();
 
-    print(account2.password);
-    print(account2.name);
-    print(account2.email);
+    print("Email:"+account2.email);
+    print("Number:"+account2.phone);
+    print("Address:"+account2.name);
 
 
   }
